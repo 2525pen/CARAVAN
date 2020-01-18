@@ -1,6 +1,8 @@
 <h1>Editing Book</h1>
 <!-- form_for部分 -->
-<%= form_for(@blog) do |f| %>
+<%= form_for(@book) do |f| %>
+
+
     <h4>title</h4>
     <%= f.text_field :title %>
     <h4>Body</h4>
@@ -8,6 +10,16 @@
     <%= f.submit 'Update Book' %>
     <% end %>
 
-<a class="Show"><%= link_to "show", book_path(book.id) %></a>
-"|"
-<a class="Back" href="/books">Back</a>
+<% if @book.errors.any? %>
+  <div class="alert alert-warning">
+    <ul>
+      <% @book.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<a class="Show"><%= link_to "Show", book_path(@book.id) %></a>
+|
+<a class="Back"><%= link_to "Back", books_path %></a>
